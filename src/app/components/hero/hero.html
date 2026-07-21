@@ -1,0 +1,47 @@
+<!-- Al hacer clic en cualquier parte del contenedor, avanza a la siguiente publicidad -->
+<div class="relative overflow-hidden h-[600px] w-full bg-slate-900 group cursor-pointer" (click)="siguiente()">
+
+  <!-- Contenedor que se desliza horizontalmente -->
+  <div class="flex h-full w-full transition-transform duration-700 ease-in-out"
+       [style.transform]="'translateX(-' + (slideActual * 100) + '%)'">
+
+    @for (publi of publicidades; track publi.id) {
+      <!-- Cada Slide recibe su imagen de fondo -->
+      <div class="min-w-full h-full relative flex items-center justify-center bg-cover bg-center"
+           [style.backgroundImage]="'url(' + publi.imagen + ')'">
+
+        <!-- Capa negra semitransparente (60% de opacidad) para que el texto blanco siempre se lea -->
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <!-- Textos de la publicidad -->
+        <div class="container mx-auto px-4 relative z-10 text-center">
+          <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6">
+            {{ publi.titulo }} <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              {{ publi.resaltado }}
+            </span>
+          </h1>
+          <p class="mt-4 text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-10">
+            {{ publi.descripcion }}
+          </p>
+          
+          <!-- Botón de acción: stopPropagation evita que el clic aquí cambie la imagen -->
+          <button (click)="$event.stopPropagation()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full shadow-[0_10px_20px_rgba(37,99,235,0.4)] text-lg transition-transform transform hover:-translate-y-1">
+            {{ publi.boton }}
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Indicadores inferiores (Los puntitos) para saber en qué imagen estamos -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+    @for (publi of publicidades; track publi.id; let i = $index) {
+      <button (click)="$event.stopPropagation(); irA(i)"
+              class="w-3 h-3 rounded-full transition-colors"
+              [class.bg-blue-500]="slideActual === i"
+              [class.bg-white/30]="slideActual !== i">
+      </button>
+    }
+  </div>
+</div>
