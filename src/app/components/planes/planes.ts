@@ -1,22 +1,26 @@
 import { Component, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-planes',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './planes.html',
   styleUrl: './planes.scss'
 })
 export class PlanesComponent {
   @ViewChild('sectionRef') sectionRef!: ElementRef;
-  
-  // Controla si la sección ya es visible en pantalla
   isVisible = false;
+
+  // Estado para alternar entre 'solo-internet' o 'duo'
+  tipoServicio: 'internet' | 'duo' = 'internet';
 
   planes = [
     {
       nombre: 'Básico',
       velocidad: '100 Mbps',
-      precio: '60.00',
+      precioInternet: '40.00',
+      precioDuo: '80.00', // 40 internet + 40 cable
       caracteristicas: [
         'Fibra 100% simétrica', 
         'Router WiFi Dual Band', 
@@ -27,8 +31,9 @@ export class PlanesComponent {
     },
     {
       nombre: 'Familiar',
-      velocidad: '300 Mbps',
-      precio: '90.00',
+      velocidad: '200 Mbps',
+      precioInternet: '50.00',
+      precioDuo: '90.00', // 50 internet + 40 cable
       caracteristicas: [
         'Fibra 100% simétrica', 
         'Router WiFi 6 de alta potencia', 
@@ -40,8 +45,9 @@ export class PlanesComponent {
     },
     {
       nombre: 'Gamer / Pro',
-      velocidad: '600 Mbps',
-      precio: '140.00',
+      velocidad: '500 Mbps',
+      precioInternet: '70.00',
+      precioDuo: '110.00', // 70 internet + 40 cable
       caracteristicas: [
         'Fibra 100% simétrica', 
         'Mesh WiFi 6 incluido', 
@@ -53,17 +59,12 @@ export class PlanesComponent {
     }
   ];
 
-  // Detectamos cada vez que el usuario hace scroll
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    // Si ya se activó una vez, no necesitamos seguir evaluando
     if (this.isVisible) return;
-
     if (this.sectionRef) {
       const rect = this.sectionRef.nativeElement.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-
-      // Si la parte superior de la sección está cerca o dentro de la pantalla visible...
       if (rect.top <= windowHeight - 100) {
         this.isVisible = true;
       }
