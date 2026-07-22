@@ -1,8 +1,8 @@
-<section class="py-24 bg-white text-slate-900 min-h-screen relative overflow-hidden flex items-center">
+<section class="py-24 bg-white text-slate-900 min-h-screen relative overflow-hidden flex flex-col justify-between">
   
-  <div class="container mx-auto px-6 max-w-6xl relative z-10">
+  <div class="container mx-auto px-6 max-w-6xl relative z-10 my-auto">
     
-    <!-- Grid Principal (Dos columnas estilo referencia) -->
+    <!-- Grid Principal (Dos columnas) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
       <!-- Columna Izquierda: Título y Descripción Corporativa -->
@@ -116,7 +116,83 @@
     </div>
 
   </div>
+
+  <!-- SECCIÓN DIFERENCIADA: TALENTO Y EQUIPO (FONDO OSCURO MODERNO) -->
+  <div class="mt-24 bg-slate-900 text-white py-20 relative overflow-hidden border-t border-slate-800">
+    
+    <!-- Efectos lumínicos de fondo -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 max-w-6xl relative z-10">
+      
+      <!-- Cabecera de la sección de equipo -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 inline-block mb-3">
+            Nuestro Talento Humano
+          </span>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">
+            Trabajadores <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">altamente capacitados</span>
+          </h2>
+        </div>
+
+        <!-- Botones de control manual izquierda / derecha -->
+        <div class="flex items-center gap-3">
+          <button (click)="moverCarrusel('izquierda')" 
+                  class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all shadow-lg active:scale-95 cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button (click)="moverCarrusel('derecha')" 
+                  class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all shadow-lg active:scale-95 cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Carrusel con autoscroll fluido y scroll manual -->
+      <div #scrollContainer 
+           class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4 pt-2 snap-x snap-mandatory">
+        
+        @for (miembro of equipo; track miembro.nombre) {
+          <div class="min-w-[280px] md:min-w-[320px] max-w-[320px] bg-slate-800/80 backdrop-blur-md border border-slate-700/80 rounded-3xl p-6 flex flex-col justify-between shrink-0 snap-start shadow-xl group hover:border-blue-500/50 transition-all duration-300">
+            
+            <div>
+              <!-- Imagen del colaborador -->
+              <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-6 bg-slate-900 border border-slate-700">
+                <img [src]="miembro.imagen" [alt]="miembro.nombre" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                <span class="absolute bottom-3 left-3 bg-blue-600/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-sm">
+                  {{ miembro.cargo }}
+                </span>
+              </div>
+
+              <h3 class="text-xl font-extrabold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                {{ miembro.nombre }}
+              </h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                {{ miembro.descripcion }}
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest">FiberWill Team</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            </div>
+
+          </div>
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-<!-- FOOTER INTEGRADO AL FINAL DE LA VISTA -->
+<!-- FOOTER INTEGRADO AL FINAL -->
 <app-footer />
