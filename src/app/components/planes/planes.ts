@@ -12,7 +12,7 @@ export class PlanesComponent {
   @ViewChild('sectionRef') sectionRef!: ElementRef;
   isVisible = false;
 
-  tipoServicio: 'internet' | 'duo' = 'internet';
+  tipoServicio: 'internet' | 'duo' | 'cable' = 'internet';
 
   planes = [
     {
@@ -58,8 +58,22 @@ export class PlanesComponent {
     }
   ];
 
-  cambiarServicio(tipo: 'internet' | 'duo') {
-    this.tipoServicio = tipo; // Cambio directo y fluido sin bloqueos
+  // Plan exclusivo para cuando seleccionan "Solo Cable"
+  planCableUnico = {
+    nombre: 'Televisión Digital',
+    velocidad: '+100 Canales',
+    precio: '40.00',
+    caracteristicas: [
+      'Más de 100 canales en definición HD',
+      'Programación variada en familia',
+      'Deportes, películas y infantiles',
+      'Instalación sin costo en punto principal',
+      'Señal digital estable'
+    ]
+  };
+
+  cambiarServicio(tipo: 'internet' | 'duo' | 'cable') {
+    this.tipoServicio = tipo;
   }
 
   @HostListener('window:scroll', [])

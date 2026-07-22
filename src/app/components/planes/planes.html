@@ -7,13 +7,13 @@
          [class.translate-y-12]="!isVisible"
          [class.opacity-100]="isVisible"
          [class.translate-y-0]="isVisible">
-      <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Elige la velocidad que necesitas</h2>
+      <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Elige el plan ideal para ti</h2>
       <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-        Planes diseñados para cada tipo de hogar. Disfruta solo de alta velocidad o añade más de 100 canales de televisión.
+        Disfruta de internet de alta velocidad, combínalo con televisión o adquiere solo nuestro servicio de cable digital.
       </p>
 
-      <!-- Botones de pestañas -->
-      <div class="inline-flex bg-slate-200 p-1.5 rounded-2xl mb-16">
+      <!-- Botones de pestañas (3 opciones) -->
+      <div class="inline-flex flex-wrap justify-center bg-slate-200 p-1.5 rounded-2xl mb-16 gap-1">
         <button (click)="cambiarServicio('internet')"
                 [class.bg-white]="tipoServicio === 'internet'"
                 [class.shadow-md]="tipoServicio === 'internet'"
@@ -22,13 +22,21 @@
                 class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
           Solo Internet
         </button>
+        <button (click)="cambiarServicio('cable')"
+                [class.bg-white]="tipoServicio === 'cable'"
+                [class.shadow-md]="tipoServicio === 'cable'"
+                [class.text-slate-900]="tipoServicio === 'cable'"
+                [class.text-slate-600]="tipoServicio !== 'cable'"
+                class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
+          Solo Cable (TV)
+        </button>
         <button (click)="cambiarServicio('duo')"
                 [class.bg-white]="tipoServicio === 'duo'"
                 [class.shadow-md]="tipoServicio === 'duo'"
                 [class.text-slate-900]="tipoServicio === 'duo'"
                 [class.text-slate-600]="tipoServicio !== 'duo'"
                 class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
-          Internet + Cable (+100 canales)
+          Internet + Cable (Dúo)
         </button>
       </div>
     </div>
@@ -36,80 +44,120 @@
     <!-- Contenedor de tarjetas -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
       
-      @for (plan of planes; track plan.nombre) {
-        
-        <div class="rounded-3xl p-8 transition-all duration-300 ease-out transform relative flex flex-col h-full hover:-translate-y-2"
-             [class.opacity-0]="!isVisible"
-             [class.translate-y-24]="!isVisible"
-             [class.opacity-100]="isVisible"
-             [class.translate-y-0]="isVisible"
-             [class.bg-white]="!plan.destacado"
-             [class.shadow-xl]="!plan.destacado"
-             [class.hover:shadow-2xl]="!plan.destacado"
-             [class.hover:scale-105]="!plan.destacado"
-             [class.bg-slate-900]="plan.destacado"
-             [class.text-white]="plan.destacado"
-             [class.scale-105]="plan.destacado"
-             [class.hover:scale-110]="plan.destacado"
-             [class.shadow-2xl]="plan.destacado"
-             [class.shadow-blue-500/20]="plan.destacado">
-          
-          @if (plan.destacado) {
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
-              Más Popular
-            </div>
-          }
+      <!-- Si selecciona 'cable', mostramos la tarjeta exclusiva de solo televisión en tono oscuro -->
+      @if (tipoServicio === 'cable') {
+        <div class="md:col-start-2 rounded-3xl p-8 bg-slate-800 text-white shadow-xl border border-slate-700 transition-all duration-300 ease-out transform relative flex flex-col h-full hover:-translate-y-2 hover:shadow-2xl">
+  
 
           <div class="flex-grow">
-            <h3 class="text-2xl font-bold mb-2" [class.text-slate-800]="!plan.destacado">{{ plan.nombre }}</h3>
+            <h3 class="text-2xl font-bold mb-2 text-white">{{ planCableUnico.nombre }}</h3>
             
-            <div class="flex items-baseline gap-2 mb-6 border-b pb-6" [class.border-slate-200]="!plan.destacado" [class.border-slate-700]="plan.destacado">
-              <span class="text-5xl font-black">{{ plan.velocidad }}</span>
+            <div class="flex items-baseline gap-2 mb-6 border-b border-slate-700 pb-6">
+              <span class="text-4xl font-black text-white">{{ planCableUnico.velocidad }}</span>
             </div>
 
             <div class="mb-8">
-              <span class="text-4xl font-extrabold">
-                S/ {{ tipoServicio === 'internet' ? plan.precioInternet : plan.precioDuo }}
-              </span>
-              <span class="text-sm opacity-80"> /mes</span>
-              
-              @if (tipoServicio === 'duo') {
-                <div class="text-xs text-blue-400 font-semibold mt-1">Incluye Internet + Cable (100+ canales)</div>
-              }
+              <span class="text-4xl font-extrabold text-white">S/ {{ planCableUnico.precio }}</span>
+              <span class="text-sm text-slate-400"> /mes</span>
+              <div class="text-xs text-blue-400 font-semibold mt-1">Servicio de televisión independiente</div>
             </div>
 
             <ul class="space-y-4 mb-8">
-              @for (caracteristica of plan.caracteristicas; track caracteristica) {
+              @for (caracteristica of planCableUnico.caracteristicas; track caracteristica) {
                 <li class="flex items-center gap-3">
-                  <svg class="w-5 h-5 flex-shrink-0" [class.text-blue-500]="!plan.destacado" [class.text-blue-400]="plan.destacado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 flex-shrink-0 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span [class.text-slate-600]="!plan.destacado" [class.text-slate-300]="plan.destacado">{{ caracteristica }}</span>
-                </li>
-              }
-              
-              @if (tipoServicio === 'duo') {
-                <li class="flex items-center gap-3 animate-fade-in">
-                  <svg class="w-5 h-5 flex-shrink-0" [class.text-blue-500]="!plan.destacado" [class.text-blue-400]="plan.destacado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span class="font-semibold" [class.text-slate-800]="!plan.destacado" [class.text-white]="plan.destacado">Más de 100 canales HD</span>
+                  <span class="text-slate-300">{{ caracteristica }}</span>
                 </li>
               }
             </ul>
           </div>
 
-          <button class="w-full py-4 mt-auto rounded-xl font-bold transition-colors cursor-pointer"
-                  [class.bg-blue-50]="!plan.destacado"
-                  [class.text-blue-600]="!plan.destacado"
-                  [class.hover:bg-blue-100]="!plan.destacado"
-                  [class.bg-blue-500]="plan.destacado"
-                  [class.text-white]="plan.destacado"
-                  [class.hover:bg-blue-400]="plan.destacado">
-            {{ tipoServicio === 'internet' ? 'Contratar Internet' : 'Contratar Dúo' }}
+          <button class="w-full py-4 mt-auto rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-500 transition-colors cursor-pointer">
+            Contratar Solo Cable
           </button>
-
         </div>
+      } 
+      @else {
+        <!-- Si selecciona 'internet' o 'duo', mostramos las 3 tarjetas (las normales cambian a bg-slate-800) -->
+        @for (plan of planes; track plan.nombre) {
+          <div class="rounded-3xl p-8 transition-all duration-300 ease-out transform relative flex flex-col h-full hover:-translate-y-2"
+               [class.opacity-0]="!isVisible"
+               [class.translate-y-24]="!isVisible"
+               [class.opacity-100]="isVisible"
+               [class.translate-y-0]="isVisible"
+               [class.bg-slate-800]="!plan.destacado"
+               [class.text-white]="!plan.destacado"
+               [class.shadow-xl]="!plan.destacado"
+               [class.border]="!plan.destacado"
+               [class.border-slate-700]="!plan.destacado"
+               [class.hover:shadow-2xl]="!plan.destacado"
+               [class.hover:scale-105]="!plan.destacado"
+               [class.bg-slate-900]="plan.destacado"
+               [class.text-white]="plan.destacado"
+               [class.scale-105]="plan.destacado"
+               [class.hover:scale-110]="plan.destacado"
+               [class.shadow-2xl]="plan.destacado"
+               [class.shadow-blue-500/20]="plan.destacado">
+            
+            @if (plan.destacado) {
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
+                Más Popular
+              </div>
+            }
+
+            <div class="flex-grow">
+              <h3 class="text-2xl font-bold mb-2 text-white">{{ plan.nombre }}</h3>
+              
+              <div class="flex items-baseline gap-2 mb-6 border-b pb-6 border-slate-700">
+                <span class="text-5xl font-black text-white">{{ plan.velocidad }}</span>
+              </div>
+
+              <div class="mb-8">
+                <span class="text-4xl font-extrabold text-white">
+                  S/ {{ tipoServicio === 'internet' ? plan.precioInternet : plan.precioDuo }}
+                </span>
+                <span class="text-sm text-slate-400"> /mes</span>
+                
+                @if (tipoServicio === 'duo') {
+                  <div class="text-xs text-blue-400 font-semibold mt-1">Incluye Internet + Cable (100+ canales)</div>
+                }
+              </div>
+
+              <ul class="space-y-4 mb-8">
+                @for (caracteristica of plan.caracteristicas; track caracteristica) {
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 flex-shrink-0 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="text-slate-300">{{ caracteristica }}</span>
+                  </li>
+                }
+                
+                @if (tipoServicio === 'duo') {
+                  <li class="flex items-center gap-3 animate-fade-in">
+                    <svg class="w-5 h-5 flex-shrink-0 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="font-semibold text-white">Más de 100 canales HD</span>
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <button class="w-full py-4 mt-auto rounded-xl font-bold transition-colors cursor-pointer"
+                    [class.bg-blue-600]="!plan.destacado"
+                    [class.text-white]="!plan.destacado"
+                    [class.hover:bg-blue-500]="!plan.destacado"
+                    [class.bg-blue-500]="plan.destacado"
+                    [class.text-white]="plan.destacado"
+                    [class.hover:bg-blue-400]="plan.destacado">
+              {{ tipoServicio === 'internet' ? 'Contratar Internet' : 'Contratar Dúo' }}
+            </button>
+
+          </div>
+        }
       }
 
     </div>
