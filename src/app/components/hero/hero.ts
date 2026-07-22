@@ -1,61 +1,111 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, ChangeDetectorRef, afterNextRender } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './hero.html', // o hero.component.html
+  templateUrl: './hero.html',
+  styleUrl: './hero.scss'
 })
-export class HeroComponent implements OnInit {
-  
-  // 💡 TAMAÑO RECOMENDADO PARA LAS IMÁGENES: 
-  // Resolución: 1920 x 1080 píxeles (Formato horizontal / panorámico).
-  // Formato: .jpg o .webp (Para que pesen menos de 500kb y la página cargue rápido).
-  // ¿Dónde guardarlas?: Debes pegar tus imágenes en la carpeta "src/assets/" de tu proyecto.
-
+export class HeroComponent implements OnDestroy {
   publicidades = [
     {
       id: 1,
-      imagen: 'assets/banner1.jpg', // <- Aquí pondrás el nombre de tu primera imagen
-      titulo: 'Velocidad sin límites.',
-      resaltado: 'Fibra Óptica Real.',
-      descripcion: 'Conecta tu hogar o negocio en Chincha Alta y Sunampe con la red más estable. Juega y trabaja sin interrupciones.',
-      boton: 'Ver Planes'
+      imagen: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop',
+      titulo: 'Conexión a la velocidad de',
+      resaltado: 'la luz',
+      descripcion: 'Disfruta de la mejor experiencia de navegación con nuestra fibra óptica simétrica. Sin cortes, sin lag, solo velocidad pura.',
+      boton: 'Descubrir Planes'
     },
     {
       id: 2,
-      imagen: 'assets/banner2.jpg', // <- Tu segunda imagen
-      titulo: 'Cámbiate a FiberWill.',
-      resaltado: 'Instalación Gratis.',
-      descripcion: 'Promoción exclusiva. Disfruta de la mejor cobertura y soporte técnico especializado sin pagar costo de instalación.',
-      boton: 'Solicitar Promoción'
+      imagen: 'https://images.unsplash.com/photo-1542382257-80dedb725088?q=80&w=2028&auto=format&fit=crop',
+      titulo: 'El internet perfecto para',
+      resaltado: 'Gamers',
+      descripcion: 'Ping bajo y estabilidad absoluta para tus partidas competitivas. Que tu internet no sea la excusa para perder.',
+      boton: 'Ver Cobertura'
     },
     {
       id: 3,
-      imagen: 'assets/banner3.jpg', // <- Tu tercera imagen
-      titulo: 'Para los más exigentes.',
-      resaltado: 'Planes Gamer Pro.',
-      descripcion: 'Ping ultrabajo para tus partidas online y descargas masivas en segundos. Lleva tu setup al siguiente nivel.',
-      boton: 'Consultar cobertura'
+      imagen: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto=format&fit=crop',
+      titulo: 'Trabaja desde casa sin',
+      resaltado: 'interrupciones',
+      descripcion: 'Videollamadas fluidas y descargas instantáneas. Lleva el internet de tu oficina directamente a tu hogar.',
+      boton: 'Contratar Ahora'
     }
   ];
 
   slideActual = 0;
+  isAnimating = false;
+  autoPlayInterval: any;
 
-  ngOnInit() {
-    // Sigue girando automáticamente cada 5 segundos
-    setInterval(() => {
+  // Inyectamos el detector de cambios
+  constructor(private cdr: ChangeDetectorRef) {
+    // Esta es la forma moderna de Angular 17+ para ejecutar código solo en el navegador
+    afterNextRender(() => {
+      this.iniciarAutoPlay();
+    });
+  }
+
+  ngOnDestroy() {
+    this.detenerAutoPlay();
+  }
+
+  iniciarAutoPlay() {
+    this.detenerAutoPlay(); // Limpiamos por si acaso hay un timer "fantasma" previo
+    
+    this.autoPlayInterval = setInterval(() => {
+      console.log('⏱️ Han pasado 7 segundos, forzando el cambio de imagen...');
       this.siguiente();
-    }, 5000);
+      
+      // OBLIGAMOS a Angular a actualizar la pantalla
+      this.cdr.detectChanges(); 
+    }, 7000);
+  }
+
+  detenerAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+    }
+  }
+
+  reiniciarAutoPlay() {
+    this.detenerAutoPlay();
+    this.iniciarAutoPlay();
   }
 
   siguiente() {
-    // Siempre avanza al siguiente. Si llega al último, vuelve al primero.
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+    
     this.slideActual = (this.slideActual === this.publicidades.length - 1) ? 0 : this.slideActual + 1;
+    this.reiniciarAutoPlay();
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 700);
+  }
+
+  anterior() {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+    
+    this.slideActual = (this.slideActual === 0) ? this.publicidades.length - 1 : this.slideActual - 1;
+    this.reiniciarAutoPlay();
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 700);
   }
 
   irA(index: number) {
+    if (this.isAnimating || this.slideActual === index) return;
+    
+    this.isAnimating = true;
     this.slideActual = index;
+    this.reiniciarAutoPlay();
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 700);
   }
 }

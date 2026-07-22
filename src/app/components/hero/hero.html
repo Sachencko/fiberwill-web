@@ -10,7 +10,7 @@
       <div class="min-w-full h-full relative flex items-center justify-center bg-cover bg-center"
            [style.backgroundImage]="'url(' + publi.imagen + ')'">
 
-        <!-- Capa negra semitransparente (60% de opacidad) para que el texto blanco siempre se lea -->
+        <!-- Capa negra semitransparente -->
         <div class="absolute inset-0 bg-black/60"></div>
 
         <!-- Textos de la publicidad -->
@@ -34,7 +34,23 @@
     }
   </div>
 
-  <!-- Indicadores inferiores (Los puntitos) para saber en qué imagen estamos -->
+  <!-- FLECHA IZQUIERDA -->
+  <button (click)="$event.stopPropagation(); anterior()"
+          class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-3 rounded-full backdrop-blur-sm transition-all z-20 opacity-0 group-hover:opacity-100">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+
+  <!-- FLECHA DERECHA -->
+  <button (click)="$event.stopPropagation(); siguiente()"
+          class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-3 rounded-full backdrop-blur-sm transition-all z-20 opacity-0 group-hover:opacity-100">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+
+  <!-- Indicadores inferiores -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
     @for (publi of publicidades; track publi.id; let i = $index) {
       <button (click)="$event.stopPropagation(); irA(i)"

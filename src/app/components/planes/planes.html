@@ -1,0 +1,84 @@
+<!-- Añadimos #sectionRef para que el scroll detecte exactamente cuándo mostrarlo -->
+<section #sectionRef class="py-20 bg-slate-50 overflow-hidden">
+  <div class="container mx-auto px-6 max-w-7xl">
+    
+    <!-- Título y descripción animados -->
+    <div class="text-center mb-20 transition-all duration-1000 ease-out transform"
+         [class.opacity-0]="!isVisible"
+         [class.translate-y-12]="!isVisible"
+         [class.opacity-100]="isVisible"
+         [class.translate-y-0]="isVisible">
+      <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Elige la velocidad que necesitas</h2>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+        Planes diseñados para cada tipo de hogar. Sin letras pequeñas y con la mejor tecnología de fibra óptica.
+      </p>
+    </div>
+
+    <!-- Contenedor de tarjetas -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      
+      @for (plan of planes; track plan.nombre) {
+        
+        <!-- Tarjeta principal -->
+        <div class="rounded-3xl p-8 transition-all duration-300 ease-out transform relative flex flex-col h-full hover:-translate-y-2"
+             [class.opacity-0]="!isVisible"
+             [class.translate-y-24]="!isVisible"
+             [class.opacity-100]="isVisible"
+             [class.translate-y-0]="isVisible"
+             [class.bg-white]="!plan.destacado"
+             [class.shadow-xl]="!plan.destacado"
+             [class.hover:shadow-2xl]="!plan.destacado"
+             [class.hover:scale-105]="!plan.destacado"
+             [class.bg-slate-900]="plan.destacado"
+             [class.text-white]="plan.destacado"
+             [class.scale-105]="plan.destacado"
+             [class.hover:scale-110]="plan.destacado"
+             [class.shadow-2xl]="plan.destacado"
+             [class.shadow-blue-500/20]="plan.destacado">
+          
+          @if (plan.destacado) {
+            <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
+              Más Popular
+            </div>
+          }
+
+          <div class="flex-grow">
+            <h3 class="text-2xl font-bold mb-2" [class.text-slate-800]="!plan.destacado">{{ plan.nombre }}</h3>
+            
+            <div class="flex items-baseline gap-2 mb-6 border-b pb-6" [class.border-slate-200]="!plan.destacado" [class.border-slate-700]="plan.destacado">
+              <span class="text-5xl font-black">{{ plan.velocidad }}</span>
+            </div>
+
+            <div class="mb-8">
+              <span class="text-4xl font-extrabold">S/ {{ plan.precio }}</span>
+              <span class="text-sm opacity-80"> /mes</span>
+            </div>
+
+            <ul class="space-y-4 mb-8">
+              @for (caracteristica of plan.caracteristicas; track caracteristica) {
+                <li class="flex items-center gap-3">
+                  <svg class="w-5 h-5 flex-shrink-0" [class.text-blue-500]="!plan.destacado" [class.text-blue-400]="plan.destacado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span [class.text-slate-600]="!plan.destacado" [class.text-slate-300]="plan.destacado">{{ caracteristica }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <button class="w-full py-4 mt-auto rounded-xl font-bold transition-colors"
+                  [class.bg-blue-50]="!plan.destacado"
+                  [class.text-blue-600]="!plan.destacado"
+                  [class.hover:bg-blue-100]="!plan.destacado"
+                  [class.bg-blue-500]="plan.destacado"
+                  [class.text-white]="plan.destacado"
+                  [class.hover:bg-blue-400]="plan.destacado">
+            Contratar Plan
+          </button>
+
+        </div>
+      }
+
+    </div>
+  </div>
+</section>

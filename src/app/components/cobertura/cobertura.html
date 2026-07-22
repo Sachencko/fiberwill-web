@@ -1,0 +1,55 @@
+<section #sectionRef class="py-24 bg-slate-900 text-white overflow-hidden relative">
+  <div class="container mx-auto px-6 max-w-5xl relative z-10">
+    
+    <!-- Título animado -->
+    <div class="text-center mb-12 transition-all duration-1000 ease-out transform"
+         [class.opacity-0]="!isVisible"
+         [class.translate-y-12]="!isVisible"
+         [class.opacity-100]="isVisible"
+         [class.translate-y-0]="isVisible">
+      <h2 class="text-4xl font-extrabold mb-4">Consulta tu Cobertura</h2>
+      <p class="text-lg text-slate-400 max-w-xl mx-auto">
+        Descubre si nuestra fibra óptica simétrica ya se encuentra disponible en tu distrito o asentamiento.
+      </p>
+    </div>
+
+    <!-- Buscador interactivo -->
+    <div class="max-w-2xl mx-auto bg-slate-800 p-8 rounded-3xl shadow-2xl border border-slate-700 transition-all duration-1000 ease-out transform"
+         [class.opacity-0]="!isVisible"
+         [class.translate-y-24]="!isVisible"
+         [class.opacity-100]="isVisible"
+         [class.translate-y-0]="isVisible">
+      
+      <div class="flex flex-col sm:flex-row gap-4">
+        <input type="text" 
+               [(ngModel)]="zonaBusqueda" 
+               placeholder="Ej: Chincha Alta, Pueblo Nuevo..." 
+               class="flex-grow px-6 py-4 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
+        
+        <button (click)="verificarCobertura()" 
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/20">
+          Comprobar
+        </button>
+      </div>
+
+      <!-- Resultados de la búsqueda -->
+      @if (resultadoBusqueda) {
+        <div class="mt-6 p-4 rounded-xl border text-center animate-fade-in"
+             [class.bg-emerald-950]="resultadoBusqueda === 'en-zona'"
+             [class.border-emerald-500]="resultadoBusqueda === 'en-zona'"
+             [class.text-emerald-300]="resultadoBusqueda === 'en-zona'"
+             [class.bg-amber-950]="resultadoBusqueda === 'sin-zona'"
+             [class.border-amber-500]="resultadoBusqueda === 'sin-zona'"
+             [class.text-amber-300]="resultadoBusqueda === 'sin-zona'">
+          <p class="font-medium">{{ mensajeResultado }}</p>
+        </div>
+      }
+
+      <div class="mt-8 text-center text-xs text-slate-500">
+        Zonas principales con cobertura activa: Chincha Alta, Grocio Prado, Sunampe, Pueblo Nuevo, Chincha Baja.
+      </div>
+
+    </div>
+
+  </div>
+</section>
