@@ -14,6 +14,10 @@ export class PlanesComponent {
 
   tipoServicio: 'internet' | 'duo' | 'cable' = 'internet';
 
+  // ---> AQUÍ COLOCA TU NÚMERO DE WHATSAPP (con código de país, sin el símbolo +) <---
+  // Ejemplo para Perú: '51987654321'
+  numeroWhatsApp = '956302025'; 
+
   planes = [
     {
       nombre: 'Básico',
@@ -58,7 +62,6 @@ export class PlanesComponent {
     }
   ];
 
-  // Plan exclusivo para cuando seleccionan "Solo Cable"
   planCableUnico = {
     nombre: 'Televisión Digital',
     velocidad: '+100 Canales',
@@ -68,12 +71,33 @@ export class PlanesComponent {
       'Programación variada en familia',
       'Deportes, películas y infantiles',
       'Instalación sin costo en punto principal',
-      'Señal digital estable'
+      'Señal digital estable',
+      'instalación de 1 a 3 televisores sin costo adicional'
     ]
   };
 
   cambiarServicio(tipo: 'internet' | 'duo' | 'cable') {
     this.tipoServicio = tipo;
+  }
+
+  // Función que genera el enlace de WhatsApp con el mensaje del plan
+  contratarPlan(nombrePlan: string, velocidad: string, precio: string, tipoServicioActual: string) {
+    let descripcionServicio = '';
+    
+    if (tipoServicioActual === 'internet') {
+      descripcionServicio = `Plan Solo Internet de ${velocidad}`;
+    } else if (tipoServicioActual === 'duo') {
+      descripcionServicio = `Plan Dúo (Internet ${velocidad} + Más de 100 canales HD)`;
+    } else {
+      descripcionServicio = `Plan Solo Cable (Televisión Digital +100 canales)`;
+    }
+
+    const mensaje = `¡Hola! Me interesa contratar el *${nombrePlan}* (${descripcionServicio}) por un precio de *S/ ${precio} al mes*. ¿Me brindan más información por favor?`;
+    
+    const urlWhatsApp = `https://wa.me/${this.numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+    
+    // Abre WhatsApp en una pestaña nueva
+    window.open(urlWhatsApp, '_blank');
   }
 
   @HostListener('window:scroll', [])

@@ -22,14 +22,6 @@
                 class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
           Solo Internet
         </button>
-        <button (click)="cambiarServicio('cable')"
-                [class.bg-white]="tipoServicio === 'cable'"
-                [class.shadow-md]="tipoServicio === 'cable'"
-                [class.text-slate-900]="tipoServicio === 'cable'"
-                [class.text-slate-600]="tipoServicio !== 'cable'"
-                class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
-          Solo Cable (TV)
-        </button>
         <button (click)="cambiarServicio('duo')"
                 [class.bg-white]="tipoServicio === 'duo'"
                 [class.shadow-md]="tipoServicio === 'duo'"
@@ -38,17 +30,24 @@
                 class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
           Internet + Cable (Dúo)
         </button>
+        <button (click)="cambiarServicio('cable')"
+                [class.bg-white]="tipoServicio === 'cable'"
+                [class.shadow-md]="tipoServicio === 'cable'"
+                [class.text-slate-900]="tipoServicio === 'cable'"
+                [class.text-slate-600]="tipoServicio !== 'cable'"
+                class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
+          Solo Cable (TV)
+        </button>
       </div>
     </div>
 
     <!-- Contenedor de tarjetas -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
       
-      <!-- Si selecciona 'cable', mostramos la tarjeta exclusiva de solo televisión en tono oscuro -->
+      <!-- Si selecciona 'cable', mostramos la tarjeta exclusiva de solo televisión -->
       @if (tipoServicio === 'cable') {
         <div class="md:col-start-2 rounded-3xl p-8 bg-slate-800 text-white shadow-xl border border-slate-700 transition-all duration-300 ease-out transform relative flex flex-col h-full hover:-translate-y-2 hover:shadow-2xl">
-  
-
+          
           <div class="flex-grow">
             <h3 class="text-2xl font-bold mb-2 text-white">{{ planCableUnico.nombre }}</h3>
             
@@ -74,13 +73,15 @@
             </ul>
           </div>
 
-          <button class="w-full py-4 mt-auto rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-500 transition-colors cursor-pointer">
+          <!-- Botón conectado a WhatsApp para Solo Cable -->
+          <button (click)="contratarPlan(planCableUnico.nombre, planCableUnico.velocidad, planCableUnico.precio, 'cable')" 
+                  class="w-full py-4 mt-auto rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-500 transition-colors cursor-pointer flex items-center justify-center gap-2">
             Contratar Solo Cable
           </button>
         </div>
       } 
       @else {
-        <!-- Si selecciona 'internet' o 'duo', mostramos las 3 tarjetas (las normales cambian a bg-slate-800) -->
+        <!-- Si selecciona 'internet' o 'duo' -->
         @for (plan of planes; track plan.nombre) {
           <div class="rounded-3xl p-8 transition-all duration-300 ease-out transform relative flex flex-col h-full hover:-translate-y-2"
                [class.opacity-0]="!isVisible"
@@ -94,15 +95,17 @@
                [class.border-slate-700]="!plan.destacado"
                [class.hover:shadow-2xl]="!plan.destacado"
                [class.hover:scale-105]="!plan.destacado"
-               [class.bg-slate-900]="plan.destacado"
+               [class.bg-slate-950]="plan.destacado"
                [class.text-white]="plan.destacado"
                [class.scale-105]="plan.destacado"
                [class.hover:scale-110]="plan.destacado"
                [class.shadow-2xl]="plan.destacado"
-               [class.shadow-blue-500/20]="plan.destacado">
+               [class.border-2]="plan.destacado"
+               [class.border-blue-500]="plan.destacado"
+               [class.shadow-blue-500/30]="plan.destacado">
             
             @if (plan.destacado) {
-              <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg">
                 Más Popular
               </div>
             }
@@ -110,7 +113,7 @@
             <div class="flex-grow">
               <h3 class="text-2xl font-bold mb-2 text-white">{{ plan.nombre }}</h3>
               
-              <div class="flex items-baseline gap-2 mb-6 border-b pb-6 border-slate-700">
+              <div class="flex items-baseline gap-2 mb-6 border-b pb-6" [class.border-slate-700]="!plan.destacado" [class.border-slate-800]="plan.destacado">
                 <span class="text-5xl font-black text-white">{{ plan.velocidad }}</span>
               </div>
 
@@ -146,7 +149,9 @@
               </ul>
             </div>
 
-            <button class="w-full py-4 mt-auto rounded-xl font-bold transition-colors cursor-pointer"
+            <!-- Botón conectado a WhatsApp para los planes dinámicos -->
+            <button (click)="contratarPlan(plan.nombre, plan.velocidad, (tipoServicio === 'internet' ? plan.precioInternet : plan.precioDuo), tipoServicio)" 
+                    class="w-full py-4 mt-auto rounded-xl font-bold transition-colors cursor-pointer"
                     [class.bg-blue-600]="!plan.destacado"
                     [class.text-white]="!plan.destacado"
                     [class.hover:bg-blue-500]="!plan.destacado"
