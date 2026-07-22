@@ -17,7 +17,15 @@ export class HeroComponent implements OnDestroy {
       boton: 'Descubrir Planes'
     },
     {
-      id: 2,
+    id: 2,
+    titulo: 'Entretenimiento total',
+    resaltado: 'Más de 100 Canales en Familia',
+    descripcion: 'Disfruta de la mejor programación HD, películas y deportes para todos en casa.',
+    boton: 'Descubrir Planes',
+    imagen: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=1920&auto=format&fit=crop'
+  },
+    {
+      id: 3,
       imagen: 'https://images.unsplash.com/photo-1542382257-80dedb725088?q=80&w=2028&auto=format&fit=crop',
       titulo: 'El internet perfecto para',
       resaltado: 'Gamers',
@@ -25,7 +33,7 @@ export class HeroComponent implements OnDestroy {
       boton: 'Ver Cobertura'
     },
     {
-      id: 3,
+      id: 4,
       imagen: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto=format&fit=crop',
       titulo: 'Trabaja desde casa sin',
       resaltado: 'interrupciones',
