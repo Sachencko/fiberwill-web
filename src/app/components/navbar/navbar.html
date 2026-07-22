@@ -1,19 +1,27 @@
 <!-- Se agregó md:px-12 para más espacio lateral general -->
 <nav class="bg-slate-900 text-white py-2 px-6 md:px-12 shadow-lg fixed w-full top-0 z-50">
   
-  <!-- CAMBIO CLAVE: Se cambió "container" por "max-w-6xl" y se añadió "w-full" -->
   <div class="max-w-6xl w-full mx-auto flex justify-between items-center">
     
-    <!-- Logo ajustado a h-[85px] -->
-    <a href="#" class="flex items-center">
+    <!-- Logo actualizado para que al hacer clic recargue/vuelva al inicio -->
+    <a href="/" class="flex items-center cursor-pointer">
          <img src="assets/logo_fiberwill.png" alt="Logo FiberWill" class="h-[85px] object-contain">
     </a>
 
-    <!-- Enlaces de navegación centrales -->
-    <div class="hidden md:flex space-x-8 text-base font-medium">
-      <a href="#" class="hover:text-blue-400 transition-colors">INICIO</a>
-      <a href="#" class="hover:text-blue-400 transition-colors">PLANES</a>
-      <a href="#" class="hover:text-blue-400 transition-colors">COBERTURA</a>
+    <!-- Enlaces de navegación centrales con fuente más gruesa (font-extrabold) -->
+    <div class="hidden md:flex space-x-8 text-base font-extrabold tracking-wide">
+      <a href="#" class="relative py-1 hover:text-blue-400 transition-colors group">
+        INICIO
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#planes" class="relative py-1 hover:text-blue-400 transition-colors group">
+        PLANES
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#cobertura" class="relative py-1 hover:text-blue-400 transition-colors group">
+        COBERTURA
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
     </div>
 
     <!-- Grupo Derecho: Redes Sociales + Botón -->
@@ -46,13 +54,14 @@
         <!-- Discord -->
         <a href="https://discord.gg/fiberwill" target="_blank" class="hover:text-indigo-400 transition-colors transform hover:scale-110">
           <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.077.077 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
           </svg>
         </a>
+
       </div>
 
       <!-- Botón de Contacto -->
-      <a href="#" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+      <a href="#planes" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(37,99,235,0.5)]">
         Contrata tu Fibra
       </a>
 
@@ -61,5 +70,5 @@
   </div>
 </nav>
 
-<!-- Espaciador ajustado a h-[100px] para compensar -->
+<!-- Espaciador -->
 <div class="h-[100px] bg-slate-900"></div>
