@@ -22,14 +22,6 @@
                 class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
           Solo Internet
         </button>
-        <button (click)="cambiarServicio('duo')"
-                [class.bg-white]="tipoServicio === 'duo'"
-                [class.shadow-md]="tipoServicio === 'duo'"
-                [class.text-slate-900]="tipoServicio === 'duo'"
-                [class.text-slate-600]="tipoServicio !== 'duo'"
-                class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
-          Internet + Cable (Dúo)
-        </button>
         <button (click)="cambiarServicio('cable')"
                 [class.bg-white]="tipoServicio === 'cable'"
                 [class.shadow-md]="tipoServicio === 'cable'"
@@ -38,6 +30,15 @@
                 class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
           Solo Cable (TV)
         </button>
+        <button (click)="cambiarServicio('duo')"
+                [class.bg-white]="tipoServicio === 'duo'"
+                [class.shadow-md]="tipoServicio === 'duo'"
+                [class.text-slate-900]="tipoServicio === 'duo'"
+                [class.text-slate-600]="tipoServicio !== 'duo'"
+                class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
+          Internet + Cable (Dúo)
+        </button>
+      
       </div>
     </div>
 

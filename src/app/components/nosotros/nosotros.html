@@ -1,0 +1,122 @@
+<section class="py-24 bg-white text-slate-900 min-h-screen relative overflow-hidden flex items-center">
+  
+  <div class="container mx-auto px-6 max-w-6xl relative z-10">
+    
+    <!-- Grid Principal (Dos columnas estilo referencia) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Columna Izquierda: Título y Descripción Corporativa -->
+      <div class="lg:col-span-6 space-y-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 inline-block">
+          Sobre Nosotros
+        </span>
+        
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+          Conectando a <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Chincha con el futuro</span> de la red.
+        </h1>
+        
+        <p class="text-slate-600 text-lg leading-relaxed">
+          Empresa Individual de Responsabilidad Limitada constituida formalmente para transformar la experiencia de conectividad en los hogares y negocios. Iniciamos operaciones en <strong class="text-slate-900">mayo de 2023</strong> consolidándonos como un operador de telecomunicaciones confiable, seguro y eficiente.
+        </p>
+
+        <!-- Etiqueta de Estado Activo -->
+        <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-2 rounded-xl text-sm font-bold shadow-sm">
+          <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Condición: Activo (Domicilio Habido)
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta de Datos Fiscales Interactiva -->
+      <div class="lg:col-span-6">
+        <div (click)="abrirEnlaceOficial()"
+             class="block bg-slate-50 border border-slate-200/80 rounded-3xl p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden group hover:border-blue-400 hover:shadow-2xl transition-all duration-300 cursor-pointer">
+          
+          <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest group-hover:text-blue-600 transition-colors">
+              Información Registral de la Empresa
+            </h3>
+            <span class="text-xs font-semibold text-blue-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              Ver perfil oficial 
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+            </span>
+          </div>
+
+          <div class="space-y-5">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+              <span class="text-slate-500 text-sm font-medium">Razón Social</span>
+              <span class="text-slate-900 font-bold text-sm">FIBERWILL EIRL</span>
+            </div>
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+              <span class="text-slate-500 text-sm font-medium">RUC</span>
+              <span class="text-slate-900 font-mono font-bold text-base">20610987983</span>
+            </div>
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+              <span class="text-slate-500 text-sm font-medium">Inicio de Actividades</span>
+              <span class="text-slate-900 font-semibold text-sm">Mayo 2023</span>
+            </div>
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+              <span class="text-slate-500 text-sm font-medium">Sector Comercial</span>
+              <span class="text-blue-600 font-semibold text-sm">Telecomunicaciones</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 text-sm font-medium">Código CIIU</span>
+              <span class="text-slate-900 font-mono font-bold text-base">64207</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Fila Inferior: Bloques de Ubicación Minimalistas -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 pt-12 border-t border-slate-100">
+      
+      <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/60 border border-slate-100">
+        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm mb-1">Dirección Legal</h4>
+          <p class="text-slate-500 text-xs leading-relaxed">Pj. Emilio Guimolle Lote. 1 (Av. Alva Maurtua)</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/60 border border-slate-100">
+        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm mb-1">Operaciones</h4>
+          <p class="text-slate-500 text-xs leading-relaxed">Chincha Alta, Provincia de Chincha, Ica - Perú</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/60 border border-slate-100">
+        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm mb-1">Formalidad</h4>
+          <p class="text-slate-500 text-xs leading-relaxed">Constituida bajo los estándares del marco legal peruano.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER INTEGRADO AL FINAL DE LA VISTA -->
+<app-footer />
